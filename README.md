@@ -1,2 +1,1 @@
-# smth
-{}{}{}{}{}{}{}{}
+Gachi Bird game 
