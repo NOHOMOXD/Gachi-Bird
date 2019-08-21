@@ -9,193 +9,28 @@
     <title>Gachi Bird</title>
 </head>
 <body>
-    <center>
+    <div class="content">
+       <!-- <canvas id="game" width="288" height="512"></canvas> -->
+       <div>
+       <div class="menu">
+           <ul>
+               <li onclick="startGame()">START</li>
+               <li onclick="setings()">SETINGS</li>
+               <li onclick="about()">ABOUT</li>
+               <li><a href="https://www.donationalerts.ru/r/we_are_gucci" target="_blank" rel="noopener noreferrer">DONAT</a></li>
+           </ul>
+       </div>
+       <div class="score">
+        <ul>
+            <li>HIGH SCORE: <span></span></li>
+            <li>CURRENT SCORE: <span></span></li>
+        </ul>
+    </div>
         <canvas id="canvas" width="288" height="512">
             <p>Your browser does not support HTML5!</p>
         </canvas>
-    </center>
-<div style="display: none;">
-        <img src="images/bird.png">
-        <img src="images/bg.png">
-        <img src="images/fg.png">
-        <img src="images/pipeNorth.png">
-        <img src="images/pipeSouth.png">
+    </div>
 </div>
 </body>
-<script>
-let cvs=document.getElementById('canvas');
-let ctx = cvs.getContext('2d');
-let stop=false;
-/*let image = new Image();
-image.src="images/img.png";
-let audio = new Audio();
-audio.src="audio/aud.mp3"
-ctx.drawImage(image,X,Y,Width,Height)
-let images = [bird,bg,fg,pipeNorth,pipeSouth];
-images.forEach((el)=>{
-    el.onload = () =>{console.log(`${el.src} загружено`);}
-})
-var image = document.querySelectorAll('div img');
-var bird =image[0],bg =image[1],fg =image[2],pipeNorth =image[3],pipeSouth =image[4];
-bg.onload = () =>{};
-pipeNorth.onload = () =>{};
-pipeSouth.onload = () =>{};
-fg.onload = () =>{};
-bird.onload = () =>{};
-ctx.clearRect(0, 0, canvas.width, canvas.height);
-   if (stop==true){
-    ctx.fillStyle = "rgb(0, 110, 6)";
-    ctx.font = "24px Roboto"
-    ctx.rect(100, 115, 110, 30);
-    ctx.fill();
-    ctx.fillStyle = "rgb(0, 189, 9)";
-    ctx.font = "24px Roboto"
-    ctx.fillText('RESTART',105,139);
-    score=0;
-    cvs.addEventListener('mouseup',endgame);
-    return;
-}
-   else{
-
-// endgame
-function endgame(){
-    if ((mouseX>=110&&mouseX<=210)&&(mouseY>=115&&mouseY<=145)){
-        location.reload();
-    }
-}
-*/
-// Загрузка изображений
-let bird=new Image(), bg =new Image(), fg =new Image(), pipeNorth =new Image(), pipeSouth = new Image();
-bird.src = 'images/56/1.png';
-bg.src = 'images/billy/Слой 1.png';
-fg.src = 'images/fg.png';
-pipeNorth.src = 'images/pipeNorthLocker1.png';
-pipeSouth.src = 'images/pipeSouthLocker1.png';
-bird.onload = () =>{};
-bg.onload = () =>{
-    ctx.drawImage(bg,0,0,288,450); 
-    ctx.drawImage(fg,0,cvs.height-fg.height);
-    if (stop==false){
-    ctx.fillStyle = "rgb(0, 110, 6)";
-    ctx.font = "24px Roboto"
-    ctx.rect(100, 115, 80, 30);
-    ctx.fill();
-    ctx.fillStyle = "rgb(0, 189, 9)";
-    ctx.font = "24px Roboto"
-    ctx.fillText('PLAY',111,139);   }
-};
-fg.onload = () => {};
-pipeNorth.onload = () =>{};
-pipeSouth.onload = () =>{};
-const gap = 120; 
-const north = pipeNorth.height + gap;
-let gravity = 1.5;
-let bX=10,bY=150;
-let score=0;
-let frameBird=1,frameBilly=1;
-// звуки 
-let fly = new Audio(), scor = new Audio(),end = new Audio();
-let music = [new Audio(),new Audio(),new Audio()];
-fly.src="sounds/spank1.mp3";
-scor.src="sounds/WOO.mp3";
-end.src = "sounds/AAAAA_1.mp3";
-music[0].src='sounds/Titanic.mp3';
-music[1].src='sounds/Caramellvansen.mp3';
-music[2].src='sounds/Polka.mp3';
-// фунция анимации фона
-function animeBackground(){
-    frameBilly++;
-    if (frameBilly>10){frameBilly=1;};
-    bg.src = `images/billy/Слой ${frameBilly}.png`;
-}
-// функция анимации Билли
-function animeBilly(){
-    frameBird++;
-    if (frameBird>10){frameBird=1;};
-    bird.src = `images/56/${frameBird}.png`;
-}
-// Нажатие клавиши
-document.addEventListener('keydown',() =>{
-    bY -=35;
-    fly.play();
-});
-// координаты столбов
-let pipe = [];
-pipe[0] = {
-    x : cvs.width,
-    y : 0
-}; 
-//позиция мыши
-let mouseX;
-let mouseY;
-function checkPos(mouseEvent){
-    if(mouseEvent.pageX || mouseEvent.pageY == 0){
-        mouseX = mouseEvent.pageX - this.offsetLeft;
-        mouseY = mouseEvent.pageY - this.offsetTop;
-    }else if(mouseEvent.offsetX || mouseEvent.offsetY == 0){
-        mouseX = mouseEvent.offsetX;
-        mouseY = mouseEvent.offsetY;
-    }
-}
-function startGame(){
-    console.log(mouseX);
-    console.log(mouseY);
-    if ((mouseX>=100&&mouseX<=180)&&(mouseY>=115&&mouseY<=145)){
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        music[0].pause();
-        draw();
-        music[getRandomInt(0,2)].play();
-    }
-}
-cvs.addEventListener("mousemove", checkPos);
-cvs.addEventListener('mouseup',startGame);
-// генератор случайного числа
-function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-  }
-// Рисовка кадров
-function draw(){
-   ctx.drawImage(bg,0,0,288,450); 
-   pipe.forEach(el => {
-        ctx.drawImage(pipeNorth,el.x+20,el.y)
-        ctx.drawImage(pipeSouth,el.x+20,el.y+north)
-        el.x--;
-        if (el.x==125) {
-            pipe.push({
-                x: cvs.width,
-                y: Math.floor(Math.random()*pipeNorth.height)-pipeNorth.height
-            });
-        }
-        // проигрыш
-        if (bX + bird.width -20 >= el.x && bX <= el.x + pipeNorth.width && (bY <= el.y + pipeNorth.height || bY+bird.height >= el.y+north) || bY + bird.height >=  cvs.height - fg.height) {
-            end.play();
-            stop=true;
-            location.reload();
-
-           // draw();
-           // return;
-           //location.reload();
-        }
-        // подсчет очков
-        if (el.x == 5) {
-            score++;
-            scor.play();
-        
-        }
-   });
-   ctx.drawImage(fg,0,cvs.height-fg.height)
-
-
-    ctx.drawImage(bird,bX,bY)
-    bY += gravity;
-    ctx.fillStyle = "#000";
-    ctx.font = "24px Roboto"
-    ctx.fillText(`SCORE: ${score}`,10,cvs.height-20);
-   requestAnimationFrame(draw);
-}
-//play
-music[0].play();
-setInterval(animeBackground,250);
-setInterval(animeBilly,20);
-</script>
+<script src="main.js"></script>
 </html>

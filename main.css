@@ -1,0 +1,113 @@
+body{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin:0;
+    padding: 0;
+}
+div.content{
+    width: min-content;
+    margin: 0 auto;
+    text-align: center;
+}/*
+canvas#game{
+    display: none;
+}
+#canvas{
+    margin-top: 100;
+    transform: scale(1.5);
+}
+*/
+#canvas{
+    position: relative;
+    z-index: 1;
+}
+a{
+    color: black;
+    text-decoration: none;
+}
+a:active{
+    color: white;
+}
+.menu{
+    min-height: 128px;
+    min-width: 143px;
+    box-shadow: inset 0 0 1em black;
+    border: 5px solid rgb(3, 99, 3);
+    border-radius: 1rem;
+    position: absolute;
+    margin-top: 130px;
+    margin-left: 65px;
+    background-color: rgb(89, 139, 39);
+    background-image: url(./images/LGBT_Flag.png);
+    background-size: contain;
+    background-position: 50% 100%;
+    z-index: 3;
+}
+/* .menu ul {
+
+} */
+.menu ul li{
+    padding: 0.1rem;
+    margin-right: 2.5em;
+    display: block;
+    background-color: rgba(255, 255, 255, 0.096);
+}
+.menu ul li:hover{
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.473);
+}
+.divVolume{
+    margin: 0 13px;
+    float: left;
+    width: 117px;
+    background-color: rgba(255, 255, 255, 0.233);
+}
+.divVolume input{
+    width: 70px;
+}
+.ret{
+    padding:0 0.2rem;
+    float: left;
+    margin-left: 0.5rem;
+    margin-top: 0.1rem;
+    background-color: rgba(255, 255, 255, 0.233);
+}
+.ret:hover{
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.788);
+}
+.ret img{
+    vertical-align: sub;
+    width: 1.3rem;
+}
+.VolumeText{
+    float: right;
+}
+.divAbout{
+    margin: 0 13px;
+}
+.divAbout img{
+    top: 30px;
+    left: -50px;
+    position: absolute;
+    width: 243px;
+    z-index: inherit 4;
+}
+.score{
+    font-weight: bold;
+    font-size: 1.1rem;
+    position: absolute;
+    color: rgb(4, 145, 4);
+    margin-top: 260px;
+    margin-left: 15px;
+    z-index: 2;
+}
+.score ul{
+    list-style: none;
+}
+/* .score ul li{
+    
+} */
+@keyframes anime{
+    from {scale: 0}
+    to {scale:1}
+}
