@@ -1,36 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="main.css">
-    <link rel="shortcut icon" href="/images/cursor.ico" type="image/x-icon">
-    <title>Gachi Bird</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="icon" type="image/png" href="./images/56/1.png" />
+  <title>Gachi Bird</title>
 </head>
 <body>
-    <div class="content">
-       <!-- <canvas id="game" width="288" height="512"></canvas> -->
-       <div>
-       <div class="menu">
-           <ul>
-               <li onclick="startGame()">START</li>
-               <li onclick="setings()">SETINGS</li>
-               <li onclick="about()">ABOUT</li>
-               <li><a href="https://www.donationalerts.ru/r/we_are_gucci" target="_blank" rel="noopener noreferrer">DONAT</a></li>
-           </ul>
-       </div>
-       <div class="score">
-        <ul>
-            <li>HIGH SCORE: <span></span></li>
-            <li>CURRENT SCORE: <span></span></li>
-        </ul>
-    </div>
-        <canvas id="canvas" width="288" height="512">
-            <p>Your browser does not support HTML5!</p>
-        </canvas>
-    </div>
-</div>
+  <div id="app"></div>
+  <script type="module" src="./src/main.ts"></script>
 </body>
-<script src="main.js"></script>
 </html>

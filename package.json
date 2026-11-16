@@ -1,0 +1,23 @@
+{
+  "name": "gachi-bird",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Gachi Bird - Remastered with PixiJS v8 and TypeScript",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "assets": "node scripts/pack-assets.js",
+    "build": "npm run assets && tsc && vite build",
+    "preview": "vite preview",
+    "package:itch": "npm run build && (cd dist && zip -FSr ../gachi-bird-itch.zip . -x '*.DS_Store*')"
+  },
+  "dependencies": {
+    "pixi.js": "^8.8.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.0",
+    "sharp": "^0.33.5",
+    "typescript": "^5.7.0",
+    "vite": "^6.2.0"
+  }
+}
