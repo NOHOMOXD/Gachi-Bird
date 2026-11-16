@@ -111,25 +111,6 @@ npm run preview
 
 ---
 
-## 🌐 Публикация на itch.io
-
-Сборка полностью готова для загрузки на [itch.io](https://itch.io):
-1. Запустите команду сборки:
-   ```bash
-   npm run build
-   ```
-2. Запакуйте содержимое папки `dist/` в обычный zip-архив:
-   ```bash
-   cd dist && zip -r ../gachi-bird.zip ./* && cd ..
-   ```
-3. В панели проекта на itch.io выберите **Kind of project: HTML** и загрузите `gachi-bird.zip`, отметив чекбокс *"This file will be played in the browser"*.
-4. Рекомендуемые параметры экрана в itch.io:
-   - **Viewport dimensions**: `360` × `640` (или `450` × `800`)
-   - **Auto-detect resolution**: включено
-   - **Fullscreen button**: можно скрыть системную, так как игра имеет собственную встроенную кнопку.
-
----
-
 ## 🕊 In Memoriam
 
 > *"Sleep sweet, Aniki."*  

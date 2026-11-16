@@ -111,16 +111,19 @@ export class Game {
     this.preloader.setProgress(0.5, 'LOADING MEMORIAL...');
     const memorialTexture = await Assets.load('./assets/memorial.jpg');
 
-    // Load and buffer all audio files so no gameplay stutter occurs
-    this.preloader.setProgress(0.55, 'BUFFERING AUDIO...');
-    await this.audioManager.preloadAll((audioRatio) => {
-      this.preloader.setProgress(0.55 + audioRatio * 0.45, 'BUFFERING AUDIO...');
+    // Load critical audio files (SFX + Titanic menu music)
+    this.preloader.setProgress(0.55, 'DECODING AUDIO...');
+    await this.audioManager.preloadCritical((audioRatio) => {
+      this.preloader.setProgress(0.55 + audioRatio * 0.45, 'DECODING AUDIO...');
     });
 
     const sheet = sheetData as Spritesheet;
     const rainbowTexture = sheet.textures['rainbow'];
 
     this.createGameObjects(sheet, memorialTexture, rainbowTexture);
+
+    // Start background preloading of remaining game tracks without blocking UI
+    this.audioManager.preloadRemaining();
 
     // Set callback for entering game: unlocks audio and enters menu with music immediately
     this.preloader.setOnEnter(() => {
