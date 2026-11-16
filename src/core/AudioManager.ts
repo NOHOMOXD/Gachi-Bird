@@ -39,6 +39,22 @@ export class AudioManager {
 
     this.loadSettings();
     this.applyVolumes();
+    this.setupNativeUnlock();
+  }
+
+  private setupNativeUnlock() {
+    const unlockHandler = () => {
+      this.unlock();
+      if (this.ctx.state === 'running') {
+        ['touchstart', 'touchend', 'click', 'pointerdown', 'keydown'].forEach((evt) => {
+          window.removeEventListener(evt, unlockHandler, true);
+        });
+      }
+    };
+
+    ['touchstart', 'touchend', 'click', 'pointerdown', 'keydown'].forEach((evt) => {
+      window.addEventListener(evt, unlockHandler, { capture: true, passive: true });
+    });
   }
 
   public static getInstance(): AudioManager {
@@ -161,15 +177,31 @@ export class AudioManager {
   }
 
   /**
-   * Resumes AudioContext on initial user gesture.
+   * Resumes AudioContext on initial user gesture and kicks iOS CoreAudio pipeline.
    */
   public unlock() {
-    if (this.unlocked) return;
-    this.unlocked = true;
+    // 1. Set audio session to playback if available (bypasses silent switch on iOS 16.4+)
+    if ('audioSession' in navigator) {
+      try {
+        (navigator as unknown as { audioSession: { type: string } }).audioSession.type = 'playback';
+      } catch {}
+    }
 
+    // 2. Resume Web Audio context
     if (this.ctx.state === 'suspended') {
       this.ctx.resume().catch(() => {});
     }
+
+    // 3. Force hardware connection via a 1-sample silent buffer
+    try {
+      const buffer = this.ctx.createBuffer(1, 1, 22050);
+      const source = this.ctx.createBufferSource();
+      source.buffer = buffer;
+      source.connect(this.ctx.destination);
+      source.start(0);
+    } catch {}
+
+    this.unlocked = true;
 
     if (!this.currentMusicSource && this.musicBuffers.has(this.currentMusicIndex) && !this.isMuted) {
       this.playTrackByIndex(this.currentMusicIndex);
